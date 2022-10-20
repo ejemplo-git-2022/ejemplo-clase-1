@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import edu.curso.spring.primerospasos.bo.Producto;
 
+// Patron DAO
+// Generic DAO
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 

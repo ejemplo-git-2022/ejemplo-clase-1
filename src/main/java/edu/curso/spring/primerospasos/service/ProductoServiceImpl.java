@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,10 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+	
+	public ProductoServiceImpl() {
+		log.info("Creando una nueva instancia de ProductoServiceImpl......");
+	}
 	
 	@Override
 	public Long altaDeNuevoProducto(Producto producto) {

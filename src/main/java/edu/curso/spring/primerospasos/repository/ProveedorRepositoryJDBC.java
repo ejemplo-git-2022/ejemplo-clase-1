@@ -42,7 +42,7 @@ public class ProveedorRepositoryJDBC implements ProveedorRepository {
 
 	@Override
 	public Proveedor buscarProveedorPorId(Long id) {
-		String sql = "SELECT id, nombre, direccion) FROM PROVEEDORES WHERE id = ?";
+		String sql = "SELECT id, nombre, direccion FROM PROVEEDORES WHERE id = ?";
 		return jdbcTemplate.queryForObject(sql, new RowMapper<Proveedor>() {
 			
 			@Override
@@ -55,7 +55,7 @@ public class ProveedorRepositoryJDBC implements ProveedorRepository {
 
 	@Override
 	public List<Proveedor> buscarProveedores() {
-		String sql = "SELECT id, nombre, direccion) FROM PROVEEDORES";
+		String sql = "SELECT id, nombre, direccion FROM PROVEEDORES";
 		return jdbcTemplate.query(sql, new RowMapper<Proveedor>() {
 			
 			@Override

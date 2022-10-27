@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.curso.spring.primerospasos.bo.Producto;
@@ -22,12 +23,27 @@ public class ProductosRestController {
 
 	@Autowired
 	private ProductoService productoService;
+
+	
+	@GetMapping("/buscar")
+	public List<ProductoDTO> buscarProductosPorNombre(@RequestParam String nombre) {
+		List<Producto> productos = productoService.recuperarProductosPorNombre(nombre);
+		List<ProductoDTO> productosDTO = new ArrayList<ProductoDTO>();
+		for(Producto p : productos) {
+			productosDTO.add(new ProductoDTO(p));
+		}
+		return productosDTO;
+	}
+
 	
 	@GetMapping("/{id}") //ejemplo ruta /api/productos/23213
 	public ProductoDTO buscarProductoPorId(@PathVariable(name = "id") Long id) {
 		Producto producto = productoService.buscarProductoPorId(id);
 		return new ProductoDTO(producto);
 	}
+
+	
+
 	
 	@GetMapping
 	public List<ProductoDTO> buscarProductos() {

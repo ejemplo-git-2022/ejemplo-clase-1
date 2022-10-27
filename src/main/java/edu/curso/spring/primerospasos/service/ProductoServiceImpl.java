@@ -61,5 +61,11 @@ public class ProductoServiceImpl implements ProductoService {
 		log.info("Borrar producto " + id);
 		productoRepository.deleteById(id);
 	}
+
+	@Override
+	public List<Producto> recuperarProductosPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return productoRepository.buscarProductosPorNombre(nombre);
+	}
 	
 }

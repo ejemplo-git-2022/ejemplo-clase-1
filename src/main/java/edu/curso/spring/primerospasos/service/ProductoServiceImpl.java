@@ -36,8 +36,12 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void actualizarProducto(Producto producto) {
+	public void actualizarProducto(Producto producto) throws ProductoException {
 		log.info("Actualizar producto " + producto);
+		
+		if(producto.getPrecio() <= 1000)
+			throw new ProductoException("El producto " + producto.getNombre() + " no puede ser menor o igual a 1000");
+		
 		productoRepository.save(producto);
 	}
 

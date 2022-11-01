@@ -2,7 +2,10 @@ package edu.curso.spring.primerospasos.rest;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import edu.curso.spring.primerospasos.PrimerosPasosApplication;
 import edu.curso.spring.primerospasos.bo.Producto;
 import edu.curso.spring.primerospasos.dto.ProductoDTO;
+import edu.curso.spring.primerospasos.service.ProductoException;
 import edu.curso.spring.primerospasos.service.ProductoService;
 
 @RestController
 @RequestMapping("/api/productos")
 public class ProductosRestController {
+
+	private static Logger log = LoggerFactory.getLogger(ProductosRestController.class);
 
 	@Autowired
 	private ProductoService productoService;
@@ -75,7 +83,13 @@ public class ProductosRestController {
 		Producto producto = productoService.buscarProductoPorId(id);
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());
-		productoService.actualizarProducto(producto);
+		try {
+			productoService.actualizarProducto(producto);
+		} catch (ProductoException e) {
+			log.error("Error al actualizar producto", e);
+			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+		}
 		return productoDTO;
 	}
 	

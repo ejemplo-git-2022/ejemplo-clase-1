@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.curso.spring.primerospasos.PrimerosPasosApplication;
@@ -34,7 +35,7 @@ public class ProductoServiceImpl implements ProductoService {
 		productoRepository.save(producto);
 		return producto.getId();
 	}
-
+	
 	@Override
 	public void actualizarProducto(Producto producto) throws ProductoException {
 		log.info("Actualizar producto " + producto);

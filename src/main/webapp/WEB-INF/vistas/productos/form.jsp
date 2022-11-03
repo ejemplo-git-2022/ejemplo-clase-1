@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="productoForm" action="guardar.html" method="post">
+	<form:form modelAttribute="productoForm" action="/productos/guardar" method="post">
 		<table>
 			<tr>
 				<td>Id</td>

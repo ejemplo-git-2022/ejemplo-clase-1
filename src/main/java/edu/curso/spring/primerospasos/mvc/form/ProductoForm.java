@@ -1,9 +1,18 @@
 package edu.curso.spring.primerospasos.mvc.form;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class ProductoForm {
 	
 	private Long id;
+	
+	@NotBlank
 	private String nombre;
+	
+	@NotNull
+	@Positive
 	private Double precio;
 	
 	public ProductoForm() { }

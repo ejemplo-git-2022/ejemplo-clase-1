@@ -18,11 +18,17 @@
 			</tr>
 			<tr>
 				<td>Nombre</td>
-				<td><form:input path="nombre"/></td>
+				<td>
+					<form:input path="nombre"/>
+					<form:errors path="nombre"/>
+				</td>
 			</tr>
 			<tr>
 				<td>Precio</td>
-				<td><form:input path="precio"/></td>
+				<td>
+					<form:input path="precio"/>
+					<form:errors path="precio"/>
+				</td>
 			</tr>
 		</table>
 		<button type="submit">Enviar datos</button>

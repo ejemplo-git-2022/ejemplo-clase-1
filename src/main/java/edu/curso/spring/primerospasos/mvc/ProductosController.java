@@ -3,6 +3,7 @@ package edu.curso.spring.primerospasos.mvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
+
+import javax.validation.Valid;
 
 import edu.curso.spring.primerospasos.bo.Producto;
 import edu.curso.spring.primerospasos.mvc.form.ProductoForm;
@@ -44,7 +47,13 @@ public class ProductosController {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardarProducto(@ModelAttribute(name = "productoForm") ProductoForm productoForm, Model model) {
+	public String guardarProducto(@Valid @ModelAttribute(name = "productoForm") ProductoForm productoForm, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) {	
+			model.addAttribute("productoForm", productoForm);
+			return "/productos/form";
+		}
+		
 		Producto producto = new Producto();
 		producto.setNombre(productoForm.getNombre());
 		producto.setPrecio(productoForm.getPrecio());

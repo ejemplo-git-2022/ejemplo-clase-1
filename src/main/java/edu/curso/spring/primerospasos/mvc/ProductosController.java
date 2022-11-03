@@ -51,7 +51,7 @@ public class ProductosController {
 		
 		productoService.altaDeNuevoProducto(producto);
 		
-		return "redirect:/productos/listar";
+		return "redirect:/productos/index";
 	}
 	
 	

@@ -24,7 +24,7 @@
 			<td>${p.id}</td>
 			<td>${p.nombre}</td>
 			<td>${p.precio}</td>
-			<td><a href="/productos/${p.id}">Ver</a></td>
+			<td><a href="/productos/${p.id}">Ver</a>&nbsp;<a href="/productos/${p.id}/editar">Editar</a>&nbsp;<a href="/productos/${p.id}/borrar">Borrar</a></td>
 		</tr>
 	</c:forEach>
 </table>

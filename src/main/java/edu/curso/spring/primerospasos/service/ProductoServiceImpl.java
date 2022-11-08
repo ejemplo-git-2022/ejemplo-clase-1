@@ -6,13 +6,16 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.curso.spring.primerospasos.PrimerosPasosApplication;
+import edu.curso.spring.primerospasos.bo.CategoriaProducto;
 import edu.curso.spring.primerospasos.bo.Producto;
+import edu.curso.spring.primerospasos.repository.CategoriaProductoRepository;
 import edu.curso.spring.primerospasos.repository.ProductoRepository;
 
 // Patron Fachada
@@ -24,6 +27,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+	
+	@Autowired
+	private CategoriaProductoRepository categoriaProductoRepository;
 	
 	public ProductoServiceImpl() {
 		log.info("Creando una nueva instancia de ProductoServiceImpl......");
@@ -71,6 +77,17 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<Producto> recuperarProductosPorNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return productoRepository.buscarProductosPorNombre(nombre);
+	}
+	
+	@Cacheable("categorias")
+	public List<CategoriaProducto> recuperarListadoDeCategorias() {
+		return categoriaProductoRepository.buscarCategoriasProducto();
+	}
+	
+	@Cacheable("categoriaPorId")
+	public CategoriaProducto buscarCategoriaProductoPorId(Long id) {
+		return categoriaProductoRepository.buscarCategoriaProductoPorId(id);
+
 	}
 	
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,4 +96,14 @@ public class ProductoServiceImpl implements ProductoService {
 
 	}
 	
+	@Scheduled(fixedRate = 5000)
+	public void ejemploScheduled1() {
+		log.info("@Scheduled 5000....... " + Thread.currentThread().getName());
+	}
+
+	@Scheduled(cron = "0/10 * * * * ?")
+	public void ejemploScheduled2() {
+		log.info("@Scheduled cron 0/10 * * * * ? ....... " + Thread.currentThread().getName());
+	}
+
 }

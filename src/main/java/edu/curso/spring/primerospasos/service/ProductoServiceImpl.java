@@ -17,6 +17,7 @@ import edu.curso.spring.primerospasos.bo.CategoriaProducto;
 import edu.curso.spring.primerospasos.bo.Producto;
 import edu.curso.spring.primerospasos.repository.CategoriaProductoRepository;
 import edu.curso.spring.primerospasos.repository.ProductoRepository;
+import edu.curso.spring.primerospasos.util.EmailManager;
 
 // Patron Fachada
 @Service
@@ -31,6 +32,9 @@ public class ProductoServiceImpl implements ProductoService {
 	@Autowired
 	private CategoriaProductoRepository categoriaProductoRepository;
 	
+	@Autowired
+	private EmailManager emailManager;
+	
 	public ProductoServiceImpl() {
 		log.info("Creando una nueva instancia de ProductoServiceImpl......");
 	}
@@ -39,6 +43,7 @@ public class ProductoServiceImpl implements ProductoService {
 	public Long altaDeNuevoProducto(Producto producto) {
 		log.info("Alta de nuevo producto " + producto);
 		productoRepository.save(producto);
+		emailManager.enviarEmail("pepe@pepe.com", "Dando de alta un nuevo producto con el id: " + producto.getId());
 		return producto.getId();
 	}
 	
